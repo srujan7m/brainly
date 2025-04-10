@@ -1,1 +1,0 @@
-export const MONGO_URL = "mongodb+srv://srujan7:srujan9758@cluster0.otthwff.mongodb.net/"
