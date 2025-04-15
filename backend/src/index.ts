@@ -63,22 +63,22 @@ app.post("/api/v1/signin", async (req, res) => {
 })
 
 app.post("/api/v1/content", userMiddleware, async (req, res) => {
-    console.log("Received Content Data:", req.body);  // ✅ Log request body
-    console.log("User ID from Middleware:", req.userId);  // ✅ Log userId
+    console.log("Received Content Data:", req.body);  
+    console.log("User ID from Middleware:", req.userId);  
 
     try { 
         const content = await ContentModel.create({
             link: req.body.link,
             type: req.body.type,
             title: req.body.title,
-            userId: req.userId,  // ✅ Ensure userId is correctly attached
+            userId: req.userId,  
             tags: []
         });
 
-        console.log("Content Created:", content);  // ✅ Log created content
+        console.log("Content Created:", content); 
         res.json({ message: "Content added" });
     } catch (e) {
-        console.error("Error adding content:", e);  // ✅ Log exact error
+        console.error("Error adding content:", e); 
 
         res.status(500).json({ message: "Error adding content" });
     } 
