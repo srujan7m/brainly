@@ -46,7 +46,7 @@ export const Card = ({title ,link ,type}: CardProps)=>{
         axios.delete(`${BACKEND_URL}/api/v1/content`, {
           data: { title },
           headers: {
-            Authorization: token, // ✅ No 'Bearer' prefix
+            Authorization: token,
           },
         })
         .then((res) => {

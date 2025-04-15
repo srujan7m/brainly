@@ -17,25 +17,9 @@ app.use(cors({
 
 app.post("/api/v1/signup", async (req, res) => {
     // TODO: zod validation , hash the password
-    // const username = req.body.username;
-    // const password = req.body.password;
-
-    // try {
-    //     await UserModel.create({
-    //         username: username,
-    //         password: password
-    //     }) 
-
-    //     res.json({
-    //         message: "User signed up"
-    //     })
-    // } catch(e) {
-    //     res.status(409).json({
-    //         message: "User already exists"
-    //     })
-    // }
+    
    
-        console.log("Request Body:", req.body);  // ✅ Log request data
+        console.log("Request Body:", req.body);  
     
         const username = req.body.username;
         const password = req.body.password;
@@ -43,11 +27,11 @@ app.post("/api/v1/signup", async (req, res) => {
         try {
             const user = await UserModel.create({ username, password });
     
-            console.log("User Created:", user);  // ✅ Log created user
+            console.log("User Created:", user); 
     
             res.json({ message: "User signed up" });
         } catch (e) {
-            console.error("Signup Error:", e);  // ✅ Log exact error
+            console.error("Signup Error:", e);
     
             res.status(409).json({ message: "User already exists" });
         }
@@ -78,26 +62,6 @@ app.post("/api/v1/signin", async (req, res) => {
     }
 })
 
-// app.post("/api/v1/content", userMiddleware, async (req, res) => {
-//     const link = req.body.link;
-//     const type = req.body.type;
-//    try{ 
-//     await ContentModel.create({
-//         link,
-//         type,
-//         title: req.body.title,
-//         userId: req.userId,
-//         tags: []
-//     });
-//     res.json({
-//         message: "Content added"
-//     })
-// }catch(e){
-//         res.status(500).json({
-//             message: "Error adding content"
-//         })
-//     } 
-// })
 app.post("/api/v1/content", userMiddleware, async (req, res) => {
     console.log("Received Content Data:", req.body);  // ✅ Log request body
     console.log("User ID from Middleware:", req.userId);  // ✅ Log userId
