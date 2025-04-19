@@ -2,17 +2,16 @@ import { useEffect } from "react"
 import { DeleteIcon } from "../icons/DeleteIcon"
 import { YTIcon } from "../icons/YtIcon"
 import { XIcon } from "../icons/TwitterIcon"
-import axios from "axios"
-import { BACKEND_URL } from "../config"
 import { RedirectIcon } from "../icons/RedirectIcon"
 
 interface CardProps{
     title:string
     link:string
     type:"twitter" | "youtube" 
+    onClickDelete? : (title:string) => void;
 }
 
-export const Card = ({title ,link ,type}: CardProps)=>{
+export const Card = ({title ,link ,type, onClickDelete}: CardProps)=>{
     useEffect(() => {
         if (type === "twitter") {
             const script = document.createElement("script");
@@ -40,23 +39,6 @@ export const Card = ({title ,link ,type}: CardProps)=>{
     };
 
 
-    const Delete_content = () => {
-        const token = localStorage.getItem("token");
-      
-        axios.delete(`${BACKEND_URL}/api/v1/content`, {
-          data: { title },
-          headers: {
-            Authorization: token,
-          },
-        })
-        .then((res) => {
-          console.log(res.data.message);
-        })
-        .catch((err) => {
-          console.error("Error:", err.response?.data?.message || err.message);
-        });
-      };
-    
     return (
        <div className="p-2">
         <div className="bg-white rounded-md border-gray-200 p-8 max-w-sm border shadow-md ">
@@ -76,14 +58,15 @@ export const Card = ({title ,link ,type}: CardProps)=>{
                     </a>
                     </div>
 
-                <div className="text-gray-500 cursor-pointer" >
-                    <DeleteIcon size="md"  onClick={Delete_content}/>
+                <div className="text-gray-500 cursor-pointer" onClick={()=>{
+                    onClickDelete && onClickDelete(title)
+                }} >
+                    <DeleteIcon size="md"/>
                     </div>
                 </div>
                
            </div>
            <div className="p-4">
-           {/* Render YouTube embed if type is "youtube" */}
            {type === "youtube" && (
                        <iframe
                        className="w-full h-64"
@@ -95,8 +78,6 @@ export const Card = ({title ,link ,type}: CardProps)=>{
                        allowFullScreen
                    ></iframe>
                     )}
-
-                    {/* Render Twitter embed if type is "twitter" */}
                     {type === "twitter" && (
                         <blockquote className="twitter-tweet">
                             <a href={link.replace("x.com", "twitter.com")}></a>

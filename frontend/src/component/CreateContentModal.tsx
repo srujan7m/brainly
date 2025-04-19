@@ -35,14 +35,18 @@ export function CreateContentModal({open, onClose}:any) {
             <div className="w-screen h-screen bg-slate-500 fixed top-0 left-0 opacity-60 flex justify-center">
                
             </div>
-            <div className="w-screen h-screen fixed top-0 left-0 flex justify-center">
-                <div className="flex flex-col justify-center">
-                    <span className="bg-white opacity-100 p-4 rounded fixed">
+                <div className="w-screen h-screen fixed top-0 left-0 flex justify-center" onClick={onClose}  >
+           
+                <div className="flex flex-col justify-center" >
+            
+
+                    <span className="bg-white opacity-100 p-4 rounded fixed"  onClick={(e) => e.stopPropagation()}>
                         <div className="flex justify-end">
                             <div onClick={onClose} className="cursor-pointer">
                                 <CrossIcon />
                             </div>
                         </div>
+                        
                         <div>
                             <Input ref={titleRef} placeholder={"Title"} />
                             <Input ref={linkRef} placeholder={"Link"} />
