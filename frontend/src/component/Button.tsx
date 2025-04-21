@@ -10,6 +10,7 @@ interface ButtonProps {
     onClick?: ()=> void
     fullWidth?: boolean;
     loading?: boolean;
+    href? : string;
 }
 
 const variantStyles ={

@@ -1,10 +1,14 @@
 import { Button } from "../component/Button";
 import { Logo } from "../icons/Logo";
-import { Signin } from "./Signin";
-import { Signup } from "./Signup";
 import demo from "../assets/images/demo.png";
+import { useNavigate } from "react-router-dom";
+
+
 
 export const LandingPage = () => {
+
+  const navigate = useNavigate(); 
+
   return (
     <div>
       <div className="flex items-center justify-between px-4 py-2">
@@ -14,17 +18,9 @@ export const LandingPage = () => {
           </div>
           Brainly
         </div>
-        <div className="flex gap-6 justify-center py-4">
-          <a href="#home" className="text-black hover:text-purple-600 transition">
-            Home
-          </a>
-          <a href="#features" className="text-black hover:text-purple-600 transition">
-            Features
-          </a>
-        </div>
         <div className="flex gap-2">
-          <Button variant="secondary" size="md" text="Sign In" onClick={Signin} />
-          <Button variant="primary" size="md" text="Sign Up" onClick={Signup} />
+          <Button variant="secondary" size="md" text="Sign In" onClick={() => navigate("/signin")}/>
+          <Button variant="primary" size="md" text="Sign Up" onClick={() => navigate("/signup")}/>
         </div>
       </div>
       <div className="justify-items-center">
@@ -43,7 +39,7 @@ export const LandingPage = () => {
             </p>
           </div>
           <div className="p-4 justify-items-center">
-            <Button text="SIGN UP" size="lg" variant="primary" onClick={Signup} />
+            <Button text="SIGN UP" size="lg" variant="primary" onClick={() => navigate("/signup")}/>
           </div>
           <div className="h-1/2 flex justify-center items-center">
       <img
@@ -55,5 +51,6 @@ export const LandingPage = () => {
         </section>
       </div>
     </div>
+    
   );
 };
